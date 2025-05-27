@@ -1,12 +1,23 @@
+const szaztolKilencszazig = {
+  100: 'száz',
+  101: 'százegy',
+  110: 'száztíz',
+  123: 'százhuszonhárom',
+  200: 'kétszáz',
+  212: 'kétszáztizenkettő',
+  300: 'háromszáz',
+  321: 'háromszázhuszonegy',
+  400: 'négyszáz',
+  500: 'ötszáz',
+  654: 'hatszázötvennégy',
+  700: 'hétszáz',
+  789: 'hétszáznyolcvankilenc',
+  800: 'nyolcszáz',
+  888: 'nyolcszáznyolcvannyolc',
+  900: 'kilencszáz',
+  999: 'kilencszázkilencvenkilenc',
+}
+
 export function szam(n) {
-  if (n === 1) return 'egy'
-  if (n === 1) return 'kettő'
-  if (n === 3) return 'három'
-  if (n === 4) return 'négy'
-  if (n === 5) return 'öt'
-  if (n === 6) return 'hat'
-  if (n === 7) return 'hét'
-  if (n === 8) return 'nyolc'
-  if (n === 9) return 'kilenc'
-  if (n === 10) return 'tíz'
+  return szaztolKilencszazig[n] || 'ismeretlen'
 }

@@ -1,3 +1,5 @@
+//100-999
+
 import { szam } from './index.mjs'
 
 console.log(1, szam(1))

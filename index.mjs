@@ -11,7 +11,6 @@ export function szam(n) {
     60: 'hatvan', 70: 'hetven', 80: 'nyolcvan', 90: 'kilencven'
   };
 
-  // Ha a szám egész, használjuk az eredeti logikát
   if (Number.isInteger(n)) {
     if (n === 0) return szamok[0];
     if (szamok[n]) return szamok[n];
@@ -28,29 +27,25 @@ export function szam(n) {
     return egyes === 0 ? szamok[tizes] : `${szamok[tizes]}${szamok[egyes]}`;
   }
   
-  // Tizedes számok kezelése
   const [egesz, tizedes] = n.toString().split('.');
   let eredmeny = '';
   
-  // Egész rész
   if (egesz === '0') {
     eredmeny = 'nulla';
   } else {
     eredmeny = szam(parseInt(egesz));
   }
   
-  // Tizedes rész
+
   if (tizedes) {
     eredmeny += ' egész ';
     
-    // Minden tizedes jegyet egyesével mondunk ki
     for (let i = 0; i < tizedes.length; i++) {
       const jegy = parseInt(tizedes[i]);
       eredmeny += szamok[jegy];
       if (i < tizedes.length - 1) eredmeny += '';
     }
-    
-    // Tizedes helyek megnevezése
+
     if (tizedes.length === 1) {
       eredmeny += ' tized';
     } else if (tizedes.length === 2) {

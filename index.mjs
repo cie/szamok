@@ -1,23 +1,41 @@
-const szaztolKilencszazig = {
-  100: 'száz',
-  101: 'százegy',
-  110: 'száztíz',
-  123: 'százhuszonhárom',
-  200: 'kétszáz',
-  212: 'kétszáztizenkettő',
-  300: 'háromszáz',
-  321: 'háromszázhuszonegy',
-  400: 'négyszáz',
-  500: 'ötszáz',
-  654: 'hatszázötvennégy',
-  700: 'hétszáz',
-  789: 'hétszáznyolcvankilenc',
-  800: 'nyolcszáz',
-  888: 'nyolcszáznyolcvannyolc',
-  900: 'kilencszáz',
-  999: 'kilencszázkilencvenkilenc',
-}
+const kilencszazigegyesek = [
+  '', 'egy', 'kettő', 'három', 'négy', 'öt', 'hat', 'hét', 'nyolc', 'kilenc'
+]
+
+const kilencszazigtizesek = [
+  '', 'tíz', 'húsz', 'harminc', 'negyven', 'ötven', 'hatvan', 'hetven', 'nyolcvan', 'kilencven'
+]
+
+const kilencszazigtizen = [
+  '', 'tizenegy', 'tizenkettő', 'tizenhárom', 'tizennégy', 'tizenöt', 'tizenhat', 'tizenhét', 'tizennyolc', 'tizenkilenc'
+]
 
 export function szam(n) {
-  return szaztolKilencszazig[n] || 'ismeretlen'
+  if (n < 100 || n > 999) return 'ismeretlen'
+
+  const kilencszazigszazas = Math.floor(n / 100)
+  const kilencszazigtizes = Math.floor((n % 100) / 10)
+  const kilencszazigegyes = n % 10
+  const kilencszazigmaradek = n % 100
+
+  let s = ''
+
+  // Százak
+  if (kilencszazigszazas === 1) {
+    s += 'száz'
+  } else {
+    s += kilencszazigegyesek[kilencszazigszazas] + 'száz'
+  }
+
+  // 10-19 között
+  if (kilencszazigmaradek >= 10 && kilencszazigmaradek < 20) {
+    s += kilencszazigtizen[kilencszazigmaradek - 10]
+  } else {
+    s += kilencszazigtizesek[kilencszazigtizes]
+    if (kilencszazigegyes !== 0) {
+      s += kilencszazigegyesek[kilencszazigegyes]
+    }
+  }
+
+  return s
 }

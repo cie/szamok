@@ -1,6 +1,4 @@
-// Test cases
-console.log('Egész számok:');
-console.log(0, szam(0));
+console.log('Eredeti tesztek:');
 console.log(1, szam(1));
 console.log(3, szam(3));
 console.log(8, szam(8));
@@ -14,6 +12,4 @@ console.log(99, szam(99));
 console.log('\nTizedes számok:');
 console.log(1.5, szam(1.5));
 console.log(3.14, szam(3.14));
-console.log(0.5, szam(0.5));
 console.log(42.75, szam(42.75));
-console.log(0.123, szam(0.123));

@@ -1,45 +1,47 @@
 export function szam(n) {
-  if (n === 1) return 'egy'
-  if (n === 1) return 'kettő'
-  if (n === 3) return 'három'
-  if (n === 4) return 'négy'
-  if (n === 5) return 'öt'
-  if (n === 6) return 'hat'
-  if (n === 7) return 'hét'
-  if (n === 8) return 'nyolc'
-  if (n === 9) return 'kilenc'
-  if (n === 10) return 'tíz'
-}
+  const szamok = {
+    1: 'egy', 2: 'kettő', 3: 'három', 4: 'négy', 5: 'öt',
+    6: 'hat', 7: 'hét', 8: 'nyolc', 9: 'kilenc',
+    10: 'tíz', 20: 'húsz', 30: 'harminc', 40: 'negyven',
+    50: 'ötven', 60: 'hatvan', 70: 'hetven', 80: 'nyolcvan', 90: 'kilencven',
+    100: 'száz', 200: 'kétszáz', 300: 'háromszáz', 400: 'négyszáz',
+    500: 'ötszáz', 600: 'hatszáz', 700: 'hétszáz', 800: 'nyolcszáz', 900: 'kilencszáz',
+    1000000: 'egymillió', 2000000: 'kétmillió'
+  };
 
-function szamNev(szam) {
-  if (szam < 1000 || szam > 1999) return 'Csak 1000 és 1999 között!';
+  let tizes = Math.floor(n / 10) * 10;
+  let egyes = n % 10;
 
-  const egyesek = ['', 'egy', 'kettő', 'három', 'négy', 'öt', 'hat', 'hét', 'nyolc', 'kilenc'];
-  const tizesek = ['', 'tíz', 'húsz', 'harminc', 'negyven', 'ötven', 'hatvan', 'hetven', 'nyolcvan', 'kilencven'];
+  if (n < 10) return szamok[n];
+  if (n < 20) return `tizen${szamok[egyes]}`;
+  if (n < 100) return egyes === 0 ? szamok[tizes] : `${szamok[tizes]}${szamok[egyes]}`;
 
-  let result = 'ezer';
+  if (n >= 1000 && n <= 1999) {
+    const szazas = Math.floor((n % 1000) / 100) * 100;
+    const maradek = n % 100;
 
-  const maradek = szam % 1000;
-  const szazas = Math.floor(maradek / 100);
-  const tizesEgyes = maradek % 100;
-  const tizes = Math.floor(tizesEgyes / 10);
-  const egyes = tizesEgyes % 10;
+    let eredmeny = 'ezer';
 
-  if (szazas > 0) {
-    result += egyesek[szazas] + 'száz';
+    if (szazas > 0) {
+      eredmeny += szamok[szazas];
+    }
+
+    if (maradek > 0) {
+      if (maradek < 10) {
+        eredmeny += szamok[maradek];
+      } else if (maradek < 20) {
+        eredmeny += `tizen${szamok[maradek % 10]}`;
+      } else {
+        const tizes = Math.floor(maradek / 10) * 10;
+        const egyes = maradek % 10;
+        eredmeny += egyes === 0
+          ? szamok[tizes]
+          : `${szamok[tizes]}${szamok[egyes]}`;
+      }
+    }
+
+    return eredmeny;
   }
 
-  if (tizesEgyes >= 10 && tizesEgyes < 20) {
-    if (tizesEgyes === 10) result += 'tíz';
-    else result += 'tizen' + egyesek[egyes];
-  } else {
-    if (tizes > 0) result += tizesek[tizes];
-    if (egyes > 0) result += egyesek[egyes];
-  }
-
-  return result;
-}
-
-for (let i = 1000; i <= 1999; i++) {
-  console.log(`${i}: ${szamNev(i)}`);
+  return 'Nem támogatott szám.';
 }
